@@ -1,8 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { GetServerSideProps, NextPage } from "next";
+import axios from "axios";
 
-export default function Home() {
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { MoviesService } from "../src/services/Movies.Service";
+
+const Home: NextPage = (props: any) => {
+  console.log(props);
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +22,8 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Get started by editing{" "}
+          <code className={styles.code}>pages/index.tsx</code>
         </p>
 
         <div className={styles.grid}>
@@ -58,12 +63,20 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
+
+export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await MoviesService.topMovies();
+  console.log(res.data);
+  return { props: res.data };
+};
