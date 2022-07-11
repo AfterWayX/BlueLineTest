@@ -7,7 +7,6 @@ import styles from "../styles/Home.module.css";
 import { MoviesService } from "../src/services/Movies.Service";
 
 const Home: NextPage = (props: any) => {
-  console.log(props);
   return (
     <div className={styles.container}>
       <Head>
@@ -76,7 +75,6 @@ const Home: NextPage = (props: any) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await MoviesService.topMovies();
-  console.log(res.data);
+  const res = await MoviesService.movies(context.query);
   return { props: res.data };
 };

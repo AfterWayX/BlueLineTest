@@ -10,7 +10,7 @@ export class MoviesService {
     const { page = 1, limit = 10 } = query;
     const skip = (page - 1) * limit;
 
-    return instance.get("/", {
+    return instance.get("/movies", {
       params: {
         ...query,
         skip,
@@ -18,7 +18,11 @@ export class MoviesService {
     });
   }
 
-  static topMovies() {
-    return instance.get("/top");
+  static movie(id: string) {
+    return instance.get("/", {
+      params: {
+        id,
+      },
+    });
   }
 }
