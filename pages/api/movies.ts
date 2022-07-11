@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  name: string;
-};
+import { MovieInterface } from "../../src/interfaces/movie.interface";
+import { dates } from "../../src/mock";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<MovieInterface[]>
 ) {
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json(dates);
 }

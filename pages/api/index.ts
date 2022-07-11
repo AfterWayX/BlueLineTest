@@ -1,18 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { MovieInterface } from "../../src/interfaces/movie.interface";
 import { dates } from "../../src/mock";
-
-type Data = {
-  name: string;
-};
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{
-    id: string;
-    name: string;
-    year: number;
-    genre: string;
-  }>
+  res: NextApiResponse<MovieInterface>
 ) {
   const { id } = req.query;
   const data = dates.find((el) => el.id === id);
