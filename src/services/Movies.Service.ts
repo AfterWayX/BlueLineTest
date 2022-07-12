@@ -13,6 +13,7 @@ export class MoviesService {
     return instance.get("/movies", {
       params: {
         ...query,
+        limit,
         skip,
       },
     });
